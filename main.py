@@ -6,6 +6,8 @@ import plot_functions
 import time
 import datetime
 from random import uniform
+# import node
+# import server
 
 if __name__ == "__main__":
 
@@ -22,8 +24,13 @@ if __name__ == "__main__":
     end_time = datetime.datetime.now()
     print(f"Time for ant colony algorithm with {len(truck.get_path()['path'])} stops: {end_time-start_time} seconds")
 
-    print(f"Truck initialized and running.\n")
     truck.print_status()
+
+    '''server = server.Server('127.0.0.1', 12345)
+    server.start()
+
+    node = node.Node('127.0.0.1', 12345, truck, routes_calculator)
+    node.start()'''
 
     '''# FOR TESTING THE ADDING OF A NEW JOB
     d = datetime.datetime.now()

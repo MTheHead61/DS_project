@@ -2,6 +2,7 @@ import socket
 import threading
 import json
 import time
+import route
 
 
 class Node:
@@ -48,10 +49,10 @@ class Node:
 
     def handle_job(self, message):
         with self.lock:
-            job = message["job"]
-            print(f"Node {self.node_id} received job: {job['withdrawal']} to {job['delivery']}")
-            result = self.calculator.shortest_deviation(self.truck.get_route_list(), self.truck.get_path())
-            self.wave(result["distance"])
+            job = json.load(message['job'], cls=route.JobDecoder)
+            print(type(job))
+            '''result = self.calculator.shortest_deviation(self.truck.get_route_list(), self.truck.get_path())
+            self.wave(result["distance"])'''
 
     def wave(self, wave_weight):
         with self.lock:

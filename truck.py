@@ -103,7 +103,10 @@ class Truck:
 
     def print_status(self):
         self.update_status()
-        print(f"Time:\t{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}\n"
+        available_string = "The truck is correctly running." if self.is_available() else \
+            "The truck is currently unavailable."
+        print(f"{available_string}\n"
+              f"Time:\t{datetime.datetime.now().strftime('%H:%M:%S %d-%m-%Y')}\n"
               f"Battery left:\t{self.get_energy()}\n"
               f"Space left:\t{self.get_loading_space_left()}\n"
               f"Actual_position:\t{self.get_actual_position()}")
@@ -127,5 +130,3 @@ class Truck:
             actual_position = [float(lines[-2]), float(lines[-1])]
             self.set_actual_position(actual_position)
             return True
-
-

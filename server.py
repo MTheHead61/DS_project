@@ -38,16 +38,13 @@ class Server:
                     client_socket.send(json.dumps(response).encode('utf-8'))
 
         elif message.get("type") == "JOB_REQUEST":
-            with self.lock:
-                for node_id, node_info in self.nodes.items():
-                    if node_info["active"]:
-                        self.send_job(node_info["ip"], message["job"])
+            pass
 
         elif message.get("type") == "TAKE_JOB":
             with self.lock:
                 node_id = message.get("node_id")
                 if node_id in self.nodes:
-                    response = {"type": "ACK"}
+                    response = {"type": "JOB_ACK"}
                     client_socket.send(json.dumps(response).encode('utf-8'))
 
         client_socket.close()
@@ -62,7 +59,7 @@ class Server:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
             try:
                 client_socket.connect((target_ip, self.port))
-                message = {"type": "JOB", "job": job}
+                message = {"type": "JOB", "job": json.dumps(job, cls=route.JobEncoder)}
                 client_socket.send(json.dumps(message).encode('utf-8'))
             except ConnectionRefusedError:
                 # Handle connection error
