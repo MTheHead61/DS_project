@@ -1,3 +1,4 @@
+import datetime
 import json
 
 
@@ -152,7 +153,7 @@ class StopEncoder(json.JSONEncoder):
                 "latitude": o.get_latitude(),
                 "longitude": o.get_longitude(),
                 "withdrawal": o.is_withdrawal(),
-                "time_of_request": o.get_time_of_request(),
+                "time_of_request": str(o.get_time_of_request()),
                 "priority": o.get_priority(),
                 "delivery_id": o.get_delivery_id()
             }
@@ -168,7 +169,7 @@ class StopDecoder(json.JSONDecoder):
         decoded_stop = Stop(o.get("latitude"),
                             o.get("longitude"),
                             o.get("withdrawal"),
-                            o.get("time_of_request"),
+                            datetime.datetime.strptime(o.get("time_of_request"), "%Y-%m-%d %H:%M:%S.%f"),
                             o.get("priority"),
                             o.get("delivery_id"))
         return decoded_stop

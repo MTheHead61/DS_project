@@ -5,8 +5,8 @@ import truck
 
 
 class RoutesCalculator:
-    def __init__(self, t: truck.Truck):
-        self.graph = osmnx.graph_from_place("Messina, Italy", network_type="drive", simplify=False)
+    def __init__(self, t: truck.Truck, string_graph_place="Messina, Italy"):
+        self.graph = osmnx.graph_from_place(string_graph_place, network_type="drive", simplify=False)
         self.graph = add_edge_lengths(self.graph)
         self.k = 5
         self.truck = t

@@ -91,13 +91,13 @@ class Truck:
     def append_to_stop_list(self, stop):
         self.route_list.append_stop_to_list(stop)
 
-    def dummy_route(self, num):
+    def dummy_route(self, num, min_lat=15.49, max_lat=15.65, min_lon=38.12, max_lon=38.26):
         r = route.RouteList()
         r.append_stop_to_list(self.starting_point)
         for i in range(num):
             d = datetime.datetime.now()
-            job = route.Job(route.Stop(uniform(38.12, 38.26), uniform(15.49, 15.65), True, d, 1, i),
-                            route.Stop(uniform(38.12, 38.26), uniform(15.49, 15.65), False, d, 1, i))
+            job = route.Job(route.Stop(uniform(min_lon, max_lon), uniform(min_lat, max_lat), True, d, 1, i),
+                            route.Stop(uniform(min_lon, max_lon), uniform(min_lat, max_lat), False, d, 1, i))
             r.append_from_job(job)
         self.set_route_list(r)
 

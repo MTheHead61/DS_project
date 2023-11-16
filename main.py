@@ -6,17 +6,42 @@ import plot_functions
 import time
 import datetime
 from random import uniform
-# import node
-# import server
+import json
 
 if __name__ == "__main__":
-
+    # INITIALIZATION
     truck = truck.Truck(True, 100, 100, None)
 
     routes_calculator = routes_calculator.RoutesCalculator(truck)
 
     plotter = plot_functions.Plotter(routes_calculator.get_graph())
 
+    '''# TESTING THE JSON ENCODER AND DECODER
+    d = datetime.datetime.now()
+    job_id = uniform(20, 1000)
+    job = route.Job(route.Stop(uniform(38.12, 38.26), uniform(15.49, 15.65), True, d, 1, job_id),
+                    route.Stop(uniform(38.12, 38.26), uniform(15.49, 15.65), False, d, 1, job_id))
+
+    print(type(job))
+    w_1 = job.get_withdrawal()
+    d_1 = job.get_delivery()
+    print(w_1.get_latitude(), w_1.get_longitude())
+    print(d_1.get_latitude(), d_1.get_longitude())
+
+    job_json = json.dumps(job, cls=route.JobEncoder)
+
+    print(type(job_json))
+    print(job_json)
+
+    job_2 = json.loads(job_json, cls=route.JobDecoder)
+
+    print(type(job_2))
+    w_2 = job.get_withdrawal()
+    d_2 = job.get_delivery()
+    print(w_2.get_latitude(), w_2.get_longitude())
+    print(d_2.get_latitude(), d_2.get_longitude())'''
+
+    # TESTING THE ANT COLONY ALGORITHM
     start_time = datetime.datetime.now()
 
     routes_calculator.ant_col_alg()
@@ -26,13 +51,7 @@ if __name__ == "__main__":
 
     truck.print_status()
 
-    '''server = server.Server('127.0.0.1', 12345)
-    server.start()
-
-    node = node.Node('127.0.0.1', 12345, truck, routes_calculator)
-    node.start()'''
-
-    '''# FOR TESTING THE ADDING OF A NEW JOB
+    '''# TESTING THE ADDING OF A NEW JOB
     d = datetime.datetime.now()
     job_id = uniform(20, 1000)
     new_job = route.Job(route.Stop(uniform(38.12, 38.26), uniform(15.49, 15.65), True, d, 1, job_id),
@@ -43,17 +62,15 @@ if __name__ == "__main__":
     print(new_path["path"])
     print(new_path["distance"])'''
 
-    '''# FOR TESTING THE PLOT OF THE ROUTES
+    '''# TESTING THE PLOT OF THE ROUTES
     plotter.plot_routes(truck.get_node_route())
     input()'''
 
-    '''FOR TESTING THE UPDATE OF THE STATUS
+    '''TESTING THE UPDATE OF THE STATUS
     time.sleep(5)
     external_controller.write_truck_status(50, 80, [38.20, 15.52])
-    truck.update_status()
     truck.print_status()
 
     time.sleep(5)
     external_controller.write_truck_status(30, 70, [38.25, 15.63])
-    truck.update_status()
     truck.print_status()'''
