@@ -1,0 +1,24 @@
+digraph "packages" {
+rankdir=BT
+charset="utf-8"
+"DS_Project" [color="black", label=<DS_Project>, shape="box", style="solid"];
+"DS_Project.ant_colony" [color="black", label=<DS_Project.ant_colony>, shape="box", style="solid"];
+"DS_Project.external_controller" [color="black", label=<DS_Project.external_controller>, shape="box", style="solid"];
+"DS_Project.main" [color="black", label=<DS_Project.main>, shape="box", style="solid"];
+"DS_Project.node" [color="black", label=<DS_Project.node>, shape="box", style="solid"];
+"DS_Project.plot_functions" [color="black", label=<DS_Project.plot_functions>, shape="box", style="solid"];
+"DS_Project.route" [color="black", label=<DS_Project.route>, shape="box", style="solid"];
+"DS_Project.routes_calculator" [color="black", label=<DS_Project.routes_calculator>, shape="box", style="solid"];
+"DS_Project.server" [color="black", label=<DS_Project.server>, shape="box", style="solid"];
+"DS_Project.truck" [color="black", label=<DS_Project.truck>, shape="box", style="solid"];
+"DS_Project.ant_colony" -> "DS_Project.routes_calculator" [arrowhead="open", arrowtail="none"];
+"DS_Project.main" -> "DS_Project.external_controller" [arrowhead="open", arrowtail="none"];
+"DS_Project.main" -> "DS_Project.plot_functions" [arrowhead="open", arrowtail="none"];
+"DS_Project.main" -> "DS_Project.route" [arrowhead="open", arrowtail="none"];
+"DS_Project.main" -> "DS_Project.routes_calculator" [arrowhead="open", arrowtail="none"];
+"DS_Project.main" -> "DS_Project.truck" [arrowhead="open", arrowtail="none"];
+"DS_Project.node" -> "DS_Project.route" [arrowhead="open", arrowtail="none"];
+"DS_Project.routes_calculator" -> "DS_Project.truck" [arrowhead="open", arrowtail="none"];
+"DS_Project.server" -> "DS_Project.route" [arrowhead="open", arrowtail="none"];
+"DS_Project.truck" -> "DS_Project.route" [arrowhead="open", arrowtail="none"];
+}
